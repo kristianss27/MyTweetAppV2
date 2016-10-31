@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyTweetApp</string>
+    <string name="login_label">Log in</string>
+    <string name="title_activity_timeline">TimelineActivity</string>
+    <string name="test_tweet_text">lecturing at the \"analyzing big data with twitter\" class at @cal with @othman  http://t.co/bfj7zkDJ</string>
+    <string name="test_tweet_user_name">Raffi Bustamante</string>
+    <string name="test_tweet_user_screen_name">Raffi</string>
+    <string name="compose_tweet_hint">Whats happening</string>
+    <string name="compose_tweet_fragment">Compose Tweet</string>
+</resources>
