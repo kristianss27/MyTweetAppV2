@@ -3,6 +3,7 @@ package com.cristiansanchez.mytweetapp;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,11 @@ public class TweetDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_detail);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        toolbar.setLogo(R.mipmap.twittericon);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Tweet");
 
         ivUserImg = (ImageView) findViewById(R.id.ivUserImg);
         tvUserName = (TextView) findViewById(R.id.tvUserName);

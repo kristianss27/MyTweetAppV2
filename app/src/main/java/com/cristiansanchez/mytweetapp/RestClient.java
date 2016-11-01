@@ -38,7 +38,7 @@ public class RestClient extends OAuthBaseClient {
         String apiUrl = getApiUrl("statuses/home_timeline.json");
         // Specify the params
         RequestParams params = new RequestParams();
-        params.put("count", 5);
+        params.put("count", 15);
         if(sinceId!=0) {
             params.put("since_id", sinceId);
         }
@@ -58,7 +58,8 @@ public class RestClient extends OAuthBaseClient {
         RequestParams params = new RequestParams();
         //text of your status updated
         params.put("status",status);
-        //The ID of an existing status that the update is in reply to. Therefore, you must include @username
+        //The ID of an existing
+        // that the update is in reply to. Therefore, you must include @username
         if(replyTo!=null){
             replyTo = "@"+replyTo;
             params.put("in_reply_to_status_id",replyTo);

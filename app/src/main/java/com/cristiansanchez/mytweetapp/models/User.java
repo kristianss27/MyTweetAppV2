@@ -60,9 +60,7 @@ public class User {
         return uId;
     }
 
-    public String getScreenName() {
-        return "@"+screenName;
-    }
+    public String getScreenName() { return screenName; }
 
     public String getProfileImageUrl() {
         return profileImageUrl;

@@ -6,14 +6,27 @@
     android:orientation="vertical"
     tools:context="com.cristiansanchez.mytweetapp.TweetDetailActivity">
 
+    <LinearLayout
+        android:id="@+id/linear_layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/ivUserImg"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_margin="8dp"
+        android:layout_below="@+id/linear_layout1"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher" />
@@ -26,9 +39,9 @@
         android:maxLines="1"
         android:text="@string/test_tweet_user_name"
         android:textStyle="bold"
-        android:layout_above="@+id/tvUserScreenName"
-        android:layout_toRightOf="@+id/ivUserImg"
-        android:layout_toEndOf="@+id/ivUserImg" />
+        android:layout_alignTop="@+id/ivUserImg"
+        android:layout_alignLeft="@+id/tvUserScreenName"
+        android:layout_alignStart="@+id/tvUserScreenName" />
 
     <TextView
         android:id="@+id/tvUserScreenName"
@@ -37,19 +50,20 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/test_tweet_user_screen_name"
-        android:layout_below="@+id/tvCreatedAt"
-        android:layout_alignLeft="@+id/tvUserName"
-        android:layout_alignStart="@+id/tvUserName" />
+        android:layout_below="@+id/tvUserName"
+        android:layout_toRightOf="@+id/ivUserImg"
+        android:layout_toEndOf="@+id/ivUserImg" />
 
     <TextView
         android:id="@+id/tvCreatedAt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="8dp"
         android:maxLines="1"
-        android:text="1h" />
+        android:text="1h"
+        android:layout_marginLeft="8dp"
+        android:layout_above="@+id/tvUserScreenName"
+        android:layout_alignRight="@+id/tvTweetText"
+        android:layout_alignEnd="@+id/tvTweetText" />
 
     <TextView
         android:id="@+id/tvTweetText"
@@ -62,5 +76,43 @@
         android:layout_below="@+id/ivUserImg"
         android:layout_alignLeft="@+id/ivUserImg"
         android:layout_alignStart="@+id/ivUserImg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tvTweetText"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp">
+
+        <ImageView
+            android:id="@+id/ivReply"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="90dp"
+            android:src="@drawable/reply"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true" />
+
+        <ImageView
+            android:id="@+id/ivRetweet"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/retweet"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="90dp"
+            />
+
+        <ImageView
+            android:id="@+id/ivLike"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/love"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="90dp"/>
+    </LinearLayout>
+
 
 </RelativeLayout>

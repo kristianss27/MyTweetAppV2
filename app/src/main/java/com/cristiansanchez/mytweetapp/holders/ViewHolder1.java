@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public ImageView ivUserImg;
+    public ImageView ivReplyTweet;
     public TextView tvUserName;
     public TextView tvUserScreenName;
     public TextView tvTweetText;
@@ -32,14 +33,14 @@ public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClick
     private Context context;
     private List<Tweet> tweets;
 
-    public ViewHolder1(View v, Context context, List<Tweet> tweets){
+    public ViewHolder1(View v, final Context context, List<Tweet> tweets){
         super(v);
         ivUserImg = (ImageView) v.findViewById(R.id.ivUserImg);
+        ivReplyTweet = (ImageView) v.findViewById(R.id.ivReply);
         tvUserName = (TextView) v.findViewById(R.id.tvUserName);
         tvTweetText = (TextView) v.findViewById(R.id.tvTweetText);
         tvUserScreenName = (TextView) v.findViewById(R.id.tvUserScreenName);
         tvCreatedAt = (TextView) v.findViewById(R.id.tvCreatedAt);
-
         tvTweetText.setLinkTextColor(ColorStateList.valueOf(context.getResources().getColor(R.color.twitterLogo)));
 
         new PatternEditableBuilder().

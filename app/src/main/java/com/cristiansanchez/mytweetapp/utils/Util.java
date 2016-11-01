@@ -28,9 +28,16 @@ public class Util {
         }
 
         String date;
-        String[] array = relativeDate.split(" ");
-        date = array[0].toString();
-        date = date + array[1].substring(0,1);
+        if(relativeDate.contains("in")){
+            String[] array = relativeDate.split(" ");
+            date = array[1].toString();
+            date = date + array[2].substring(0,1);
+        }
+        else {
+            String[] array = relativeDate.split(" ");
+            date = array[0].toString();
+            date = date + array[1].substring(0, 1);
+        }
 
         return date;
     }

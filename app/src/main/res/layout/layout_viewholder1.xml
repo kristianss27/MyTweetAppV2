@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
     <ImageView
         android:layout_width="45dp"
         android:layout_height="45dp"
@@ -19,16 +18,20 @@
         android:adjustViewBounds="true" />
 
     <TextView
+        android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/test_tweet_user_name"
         android:maxLines="1"
         android:ellipsize="end"
-        android:layout_margin="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="3dp"
         android:layout_toRightOf="@id/ivUserImg"
         android:layout_alignParentTop="true"
+        style="@style/TwitterFont"
         android:textStyle="bold"
-        android:id="@+id/tvUserName"/>
+        android:textSize="14sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,10 +39,14 @@
         android:text="@string/test_tweet_user_screen_name"
         android:maxLines="1"
         android:ellipsize="end"
-        android:layout_margin="8dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="9dp"
         android:layout_toRightOf="@id/tvUserName"
         android:layout_alignParentTop="true"
-        android:id="@+id/tvUserScreenName"/>
+        android:id="@+id/tvUserScreenName"
+        style="@style/TwitterFont"
+        android:textSize="12sp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,7 +56,10 @@
         android:layout_margin="8dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:id="@+id/tvCreatedAt"/>
+        android:id="@+id/tvCreatedAt"
+        style="@style/TwitterFont"
+        android:textSize="13sp"
+        android:textStyle="normal"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,6 +72,45 @@
         android:linksClickable="true"
         android:layout_toRightOf="@id/ivUserImg"
         android:id="@+id/tvTweetText"
+        style="@style/TwitterFont"
+        android:textSize="13sp"
+        android:textStyle="normal"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tvTweetText"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/ivReply"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/reply"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true" />
+
+        <ImageView
+            android:id="@+id/ivRetweet"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/retweet"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="90dp"
+            />
+
+        <ImageView
+            android:id="@+id/ivLike"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/love"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="90dp"/>
+    </LinearLayout>
 
 </RelativeLayout>

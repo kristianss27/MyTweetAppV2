@@ -17,10 +17,12 @@ import android.widget.Toast;
 import com.cristiansanchez.mytweetapp.adapters.TweetAdapter;
 import com.cristiansanchez.mytweetapp.entities.TweetEntity;
 import com.cristiansanchez.mytweetapp.fragments.ComposeTweetFragment;
+import com.cristiansanchez.mytweetapp.fragments.ReplyTweetFragment;
 import com.cristiansanchez.mytweetapp.listeners.EndlessRecyclerViewScrollListener;
 import com.cristiansanchez.mytweetapp.models.Tweet;
 import com.cristiansanchez.mytweetapp.network.NetworkUtil;
 import com.cristiansanchez.mytweetapp.services.AddTweetService;
+import com.cristiansanchez.mytweetapp.utils.DividerItemDecorator;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.greenrobot.greendao.query.Query;
@@ -34,7 +36,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class TimelineActivity extends AppCompatActivity implements ComposeTweetFragment.ComposeTweeDialogListener{
+public class TimelineActivity extends AppCompatActivity implements ComposeTweetFragment.ComposeTweeDialogListener,ReplyTweetFragment.ReplyTweetDialogListener{
     private static final String TAG = "TimelineActivity";
     private SwipeRefreshLayout swipeContainer;
     private RestClient client;
@@ -44,7 +46,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
     RecyclerView.LayoutManager layoutManager;
     private final int REQUEST_CODE = 200;
     private NetworkUtil networkUtil;
-
     private Context context;
     private List<TweetEntity> listTweetsDb;
 
@@ -91,6 +92,10 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
         rvTweets = (RecyclerView) findViewById(R.id.rvTweets);
         rvTweets.setLayoutManager(linearLayoutManager);
 
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecorator(this, DividerItemDecorator.VERTICAL_LIST);
+        rvTweets.addItemDecoration(itemDecoration);
+
         rvTweets.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
@@ -104,7 +109,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
             }
         });
 
-        adapter = new TweetAdapter(TimelineActivity.this, listTweets);
+        adapter = new TweetAdapter(TimelineActivity.this, listTweets, getSupportFragmentManager());
         rvTweets.setAdapter(adapter);
 
     }
@@ -271,6 +276,13 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
 
     @Override
     public void onFinishComposeDialog(Tweet tweet) {
+        listTweets.addFirst(tweet);
+        adapter.notifyItemInserted(0);
+        rvTweets.scrollToPosition(0);
+    }
+
+    @Override
+    public void onFinishReplyTweetDialog(Tweet tweet) {
         listTweets.addFirst(tweet);
         adapter.notifyItemInserted(0);
         rvTweets.scrollToPosition(0);

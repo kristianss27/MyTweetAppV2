@@ -1,6 +1,5 @@
 package com.cristiansanchez.mytweetapp.models;
 
-import com.cristiansanchez.mytweetapp.utils.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -208,6 +207,6 @@ public class Tweet{
     }
 
     public String getCreatedAt() {
-        return new Util().getRelativeTimeAgo(createdAt);
+        return createdAt;
     }
 }

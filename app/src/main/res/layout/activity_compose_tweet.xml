@@ -10,23 +10,24 @@
     android:layout_height="match_parent"
     >
 
+
     <EditText
         android:id="@+id/etTweet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:cursorVisible="true"
-        android:textColor="@color/colorAccent"
-        android:textSize="22sp"
         android:hint="@string/compose_tweet_hint"
         android:gravity="top|left"
         android:layout_above="@+id/btSendTweet"
+        style="@style/TwitterFont"
+        android:textSize="13sp"
+        android:textStyle="normal"
         />
 
     <Button
         android:id="@+id/btSendTweet"
         android:textColor="@android:color/white"
         android:text="Button"
-        android:background="@mipmap/composetweet"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_width="60dp"
@@ -45,7 +46,6 @@
         android:id="@+id/tvCharacterCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
         android:layout_marginRight="12dp"
         android:paddingTop="4dp"
         tools:text="120"
@@ -54,6 +54,8 @@
         android:layout_toLeftOf="@+id/btSendTweet"
         android:layout_toStartOf="@+id/btSendTweet"
         android:layout_marginEnd="12dp"
+        style="@style/TwitterFont"
+        android:textSize="12sp"
         />
 
 </RelativeLayout>
