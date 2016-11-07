@@ -2,7 +2,7 @@
 
 **My Tweet App** is an android app that allows a user to view home and mentions timelines, view user profiles with user timelines, as well as compose and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **** hours spent in total
+Time spent: **22** hours spent in total
 
 ## User Stories
 
@@ -47,8 +47,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/i6l7FtG.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
+Direct link: http://i.imgur.com/i6l7FtG.gif
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
