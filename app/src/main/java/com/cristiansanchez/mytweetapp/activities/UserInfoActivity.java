@@ -32,7 +32,7 @@ public class UserInfoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //Get the screen_name from the TimelineActivity
         User user = Parcels.unwrap(getIntent().getParcelableExtra("user"));
-        String userImgBackgroundUrl =(user.getIsProfileBackgroundImage().equalsIgnoreCase("true"))?user.getProfileBackgroundImageUrl():null;
+        String userImgBackgroundUrl =(user.getIsProfileBackgroundImage().equalsIgnoreCase("true"))?user.getProfileBannerUrl():null;
         //Set all the views from the user object
         Picasso.with(this)
                 .load(user.getProfileImageUrl())
@@ -42,7 +42,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 .into(ivUserImg);
 
         Picasso.with(this)
-                .load(user.getProfileBackgroundImageUrl())
+                .load(userImgBackgroundUrl)
                 .fit()
                 .into(ivUserBackground);
 

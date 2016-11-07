@@ -58,6 +58,8 @@ public class User {
     @SerializedName("profile_background_color")
     String profileBackgroundColor;
     String description;
+    @SerializedName("profile_banner_url")
+    String profileBannerUrl;
 
     public User(){
         super();
@@ -162,6 +164,14 @@ public class User {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getProfileBannerUrl() {
+        return profileBannerUrl;
+    }
+
+    public void setProfileBannerUrl(String profileBannerUrl) {
+        this.profileBannerUrl = profileBannerUrl;
     }
 }
 

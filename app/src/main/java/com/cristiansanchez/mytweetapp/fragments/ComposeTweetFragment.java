@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cristiansanchez.mytweetapp.R;
 import com.cristiansanchez.mytweetapp.RestApplication;
@@ -33,7 +34,7 @@ import cz.msebera.android.httpclient.Header;
  * Created by kristianss27 on 10/30/16.
  */
 public class ComposeTweetFragment extends DialogFragment {
-
+    private static final String TAG = "ComposeTweetFragment";
     private RestClient client;
     private EditText etTweet;
     private TextView tvCharacterCounter;
@@ -89,7 +90,7 @@ public class ComposeTweetFragment extends DialogFragment {
                         ComposeTweeDialogListener listener = (ComposeTweeDialogListener) getTargetFragment();
 
                         Log.d("COMPOSE TWEET","Compose tweet response: "+response);
-                            Log.d("COMPOSE TWEET","ITS HERE");
+
                             tweet = Tweet.parseJSON(response.toString());
                         listener.onFinishComposeDialog(tweet);
                         dismiss();
@@ -97,7 +98,10 @@ public class ComposeTweetFragment extends DialogFragment {
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                        Log.d("ComposeTweetFragment","Tweet failed");
+                        if(errorResponse!=null){
+                            Log.d(TAG,"Error:"+errorResponse);
+                        }
+                        Toast.makeText(getContext(),"Connection failed. Try again in a while!",Toast.LENGTH_LONG).show();
                     }
 
                 });

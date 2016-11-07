@@ -1,6 +1,9 @@
 package com.cristiansanchez.mytweetapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +21,8 @@ import com.cristiansanchez.mytweetapp.fragments.MentionsTimelineFragment;
 import com.cristiansanchez.mytweetapp.fragments.TweetsListFragment;
 import com.cristiansanchez.mytweetapp.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONObject;
 import org.parceler.Parcels;
@@ -38,21 +43,6 @@ public class TimelineActivity extends AppCompatActivity {
 
         //Set up the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-
-        client.getUserInfo(new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                user = User.parseJSON(response.toString());
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                if(errorResponse!=null){
-                    Log.d(TAG,"Error:"+errorResponse);
-                }
-            }
-        });
-
-
         toolbar.setLogo(R.mipmap.twittericon);
         setSupportActionBar(toolbar);
 
@@ -67,20 +57,47 @@ public class TimelineActivity extends AppCompatActivity {
 
     }
 
-
-
     // METHODS to set up the tool bar and its menu
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.profile).setVisible(true);
-        return super.onPrepareOptionsMenu(menu);
+        final Target target = new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                BitmapDrawable mBitmapDrawable = new BitmapDrawable(getResources(), bitmap);
+                //mBitmapDrawable.setBounds(0,0,24,24);
+                // setting icon of Menu Item or Navigation View's Menu Item
+                menu.findItem(R.id.profile).setIcon(mBitmapDrawable);
+                menu.findItem(R.id.profile).setVisible(true);
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+                Log.d("DEBUG", "onBitmapFailed");
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                Log.d("DEBUG", "onPrepareLoad");
+            }
+        };
+
+        client.getUserInfo(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                user = User.parseJSON(response.toString());
+                Picasso.with(getBaseContext()).load(user.getProfileImageUrl()).resize(150,150).into(target);
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                if(errorResponse!=null){
+                    Log.d(TAG,"Error:"+errorResponse);
+                }
+            }
+        });
+        return true;
     }
 
     @Override
