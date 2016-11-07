@@ -25,7 +25,6 @@ import com.cristiansanchez.mytweetapp.RestClient;
 import com.cristiansanchez.mytweetapp.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -92,15 +91,11 @@ public class ReplyTweetFragment extends DialogFragment {
                 client.composeTweet(etTweet.getText().toString(), tweet.getUser().getName(),new JsonHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        ReplyTweetDialogListener listener = (ReplyTweetDialogListener) getActivity();
+                        ReplyTweetDialogListener listener = (ReplyTweetDialogListener) getTargetFragment();
 
                         Log.d("REPLY TWEET","Reply tweet response: "+response);
-                        try {
                             Log.d("COMPOSE TWEET","ITS HERE");
-                            tweet = new Tweet(response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                            tweet = Tweet.parseJSON(response.toString());
 
                         listener.onFinishReplyTweetDialog(tweet);
                         dismiss();

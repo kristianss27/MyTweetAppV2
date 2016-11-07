@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.cristiansanchez.mytweetapp.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import cz.msebera.android.httpclient.Header;
@@ -37,19 +35,15 @@ public class ComposeTweetActivity extends AppCompatActivity {
 
         client.composeTweet(etTweet.getText().toString(), null,new JsonHttpResponseHandler(){
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.d("COMPOSE TWEET","Compose tweet response: "+response);
-                try {
-                    Log.d("COMPOSE TWEET","LLEGOOO");
-                    tweet = new Tweet(response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.d("COMPOSE TWEET","Compose tweet response: "+responseString);
+                Log.d("COMPOSE TWEET","LLEGOOO");
+                tweet = Tweet.parseJSON(responseString);
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.d("ComposeTweetFragment","Tweet failed");
             }
 
             });

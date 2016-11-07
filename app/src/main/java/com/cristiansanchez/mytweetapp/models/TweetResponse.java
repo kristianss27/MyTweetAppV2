@@ -4,6 +4,13 @@ package com.cristiansanchez.mytweetapp.models;
  * Created by kristianss27 on 10/29/16.
  */
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
 /** Example Json returned
  * {
  "coordinates": null,
@@ -103,9 +110,33 @@ package com.cristiansanchez.mytweetapp.models;
  "in_reply_to_status_id": null
  }
  */
-public class ComposeTweetResponse {
-    String body;
-    long uId;
-    User user;
-    String createdAt;
+public class TweetResponse {
+
+    private static List<Tweet> tweets;
+
+    public TweetResponse(){}
+
+    public static List<Tweet> parseJSON(String response){
+        //We instance the GsonBuilder
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        //We already have an object called Tweet where We decode string and other values.Now We want to pass a type that defines that object
+        Type tweetType = new TypeToken<List<Tweet>>(){}.getType();
+        Gson gson = gsonBuilder.create();
+        //In this case we need to get a Tweet List
+        List<Tweet> tweetList = gson.fromJson(response,tweetType);
+        //In case We do not want to change the name of our variables on the class, we can set the name policy in the Gson Library with the code line below
+        //gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
+        //In case You just need to get one response You should use the code below
+        // TweetResponse tweetResponse = gson.fromJson(response,TweetResponse.class);
+
+        return tweetList;
+    }
+
+    public List<Tweet> getTweets() {
+        return tweets;
+    }
+
+    public void setTweets(List<Tweet> tweets) {
+        this.tweets = tweets;
+    }
 }

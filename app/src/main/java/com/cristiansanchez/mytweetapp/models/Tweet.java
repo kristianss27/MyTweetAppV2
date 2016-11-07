@@ -2,14 +2,9 @@ package com.cristiansanchez.mytweetapp.models;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.parceler.Parcel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by kristianss27 on 10/26/16.
@@ -106,36 +101,30 @@ import java.util.List;
 */
 @Parcel
 public class Tweet{
+
+    @SerializedName("text")
     String body;
+    @SerializedName("id")
     long uId;
+
     User user;
+    @SerializedName("created_at")
     String createdAt;
 
+    @SerializedName("entities")
+    Entities entities;
+
+    @SerializedName("extended_entities")
+    ExtendedEntities extendEntities;
+
+
+
+    //This constructor is necesary to use Parcel
     public Tweet(){
         super();
     }
 
-    public static Tweet parseJSON(String response) {
-        Gson gson = new GsonBuilder().create();
-        Tweet tweet = gson.fromJson(response, Tweet.class);
-        return tweet;
-    }
-
-    public ArrayList<Tweet> addTweetToList(Tweet tweet, List<Tweet> listTweet){
-        ArrayList<Tweet> arrayList = new ArrayList<Tweet>();
-        arrayList.add(tweet);
-        arrayList.addAll(listTweet);
-        return arrayList;
-    }
-
-    public Tweet (JSONObject jsonObject) throws JSONException {
-        // We are going to extract the values from the JsonObject
-        this.body = jsonObject.getString("text");
-        this.uId = jsonObject.getLong("id");
-        this.createdAt = jsonObject.getString("created_at");
-        this.user = new User(jsonObject.getJSONObject("user"));
-    }
-
+    //This constructor is necesary to bind the data from this class to the DataBase
     public Tweet(String body, long uId, String createdAt,
                        String name, long userId, String screenName,
                        String profileImageUrl) {
@@ -150,6 +139,85 @@ public class Tweet{
         this.user=user;
     }
 
+    public static Tweet parseJSON(String response){
+        Tweet tweet = null;
+        //We instance the GsonBuilder
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        //We already have an object called Tweet where We decode string and other values.Now We want to pass a type that defines that object
+        Gson gson = gsonBuilder.create();
+        try{
+           tweet = gson.fromJson(response,Tweet.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return tweet;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public long getuId() {
+        return uId;
+    }
+
+    public void setuId(long uId) {
+        this.uId = uId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Entities getEntities() {
+        return entities;
+    }
+
+    public void setEntities(Entities entities) {
+        this.entities = entities;
+    }
+
+    public ExtendedEntities getExtendEntities() {
+        return extendEntities;
+    }
+
+    public void setExtendEntities(ExtendedEntities extendEntities) {
+        this.extendEntities = extendEntities;
+    }
+
+    //Those methods would work if you are not using Gson Library
+    /*
+    public ArrayList<Tweet> addTweetToList(Tweet tweet, List<Tweet> listTweet){
+        ArrayList<Tweet> arrayList = new ArrayList<Tweet>();
+        arrayList.add(tweet);
+        arrayList.addAll(listTweet);
+        return arrayList;
+    }
+
+    public Tweet (JSONObject jsonObject) throws JSONException {
+        // We are going to extract the values from the JsonObject
+        this.body = jsonObject.getString("text");
+        this.uId = jsonObject.getLong("id");
+        this.createdAt = jsonObject.getString("created_at");
+        this.user = new User(jsonObject.getJSONObject("user"));
+    }
     public static ArrayList<Tweet> fromJSONArray(JSONArray jsonArray, List<Tweet> listTweet,boolean refresh){
         if(jsonArray!=null && jsonArray.length()>0) {
 
@@ -193,20 +261,5 @@ public class Tweet{
         return new ArrayList<>(listTweet);
 
     }
-
-    public String getBody() {
-        return body;
-    }
-
-    public long getuId() {
-        return uId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
+    */
 }

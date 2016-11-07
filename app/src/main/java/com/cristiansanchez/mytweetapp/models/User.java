@@ -1,7 +1,9 @@
 package com.cristiansanchez.mytweetapp.models;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
+
 import org.parceler.Parcel;
 
 /*
@@ -35,21 +37,45 @@ Exampl of the json file
  */
 @Parcel
 public class User {
-    String name;
-    long uId;
-    String screenName;
-    String profileImageUrl;
 
+    String name;
+    @SerializedName("id")
+    long uId;
+    @SerializedName("screen_name")
+    String screenName;
+    @SerializedName("followers_count")
+    String followersCount;
+    @SerializedName("following")
+    String following;
+    @SerializedName("friends_count")
+    String friendsCount;
+    @SerializedName("profile_image_url")
+    String profileImageUrl;
+    @SerializedName("profile_background_image_url")
+    String profileBackgroundImageUrl;
+    @SerializedName("profile_use_background_image")
+    String isProfileBackgroundImage;
+    @SerializedName("profile_background_color")
+    String profileBackgroundColor;
+    String description;
 
     public User(){
         super();
     }
 
-    public User(JSONObject jsonObject) throws JSONException {
-        this.name = jsonObject.getString("name");
-        this.uId = jsonObject.getLong("id");
-        this.screenName = jsonObject.getString("screen_name");
-        this.profileImageUrl = jsonObject.getString("profile_image_url");
+    public static User parseJSON(String response){
+        User user = null;
+        //We instance the GsonBuilder
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        //We already have an object called Tweet where We decode string and other values.Now We want to pass a type that defines that object
+        Gson gson = gsonBuilder.create();
+        try{
+            user = gson.fromJson(response,User.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return user;
     }
 
     public String getName() {
@@ -82,5 +108,60 @@ public class User {
         this.screenName = screenName;
     }
 
+    public String getFollowersCount() {
+        return followersCount;
+    }
+
+    public void setFollowersCount(String followersCount) {
+        this.followersCount = followersCount;
+    }
+
+    public String getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(String following) {
+        this.following = following;
+    }
+
+    public String getProfileBackgroundImageUrl() {
+        return profileBackgroundImageUrl;
+    }
+
+    public void setProfileBackgroundImageUrl(String profileBackgroundImageUrl) {
+        this.profileBackgroundImageUrl = profileBackgroundImageUrl;
+    }
+
+    public String getProfileBackgroundColor() {
+        return profileBackgroundColor;
+    }
+
+    public void setProfileBackgroundColor(String profileBackgroundColor) {
+        this.profileBackgroundColor = profileBackgroundColor;
+    }
+
+    public String getIsProfileBackgroundImage() {
+        return isProfileBackgroundImage;
+    }
+
+    public void setIsProfileBackgroundImage(String isProfileBackgroundImage) {
+        this.isProfileBackgroundImage = isProfileBackgroundImage;
+    }
+
+    public String getFriendsCount() {
+        return friendsCount;
+    }
+
+    public void setFriendsCount(String friendsCount) {
+        this.friendsCount = friendsCount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
 

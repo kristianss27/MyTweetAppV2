@@ -26,6 +26,9 @@ public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClick
 
     public ImageView ivUserImg;
     public ImageView ivReplyTweet;
+    public ImageView ivRetweet;
+    public ImageView ivEmbeddedImage;
+    public ImageView ivFavorite;
     public TextView tvUserName;
     public TextView tvUserScreenName;
     public TextView tvTweetText;
@@ -37,6 +40,9 @@ public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClick
         super(v);
         ivUserImg = (ImageView) v.findViewById(R.id.ivUserImg);
         ivReplyTweet = (ImageView) v.findViewById(R.id.ivReply);
+        ivRetweet = (ImageView) v.findViewById(R.id.ivRetweet);
+        ivFavorite = (ImageView) v.findViewById(R.id.ivLike);
+        ivEmbeddedImage = (ImageView) v.findViewById(R.id.ivEmbeddedImage);
         tvUserName = (TextView) v.findViewById(R.id.tvUserName);
         tvTweetText = (TextView) v.findViewById(R.id.tvTweetText);
         tvUserScreenName = (TextView) v.findViewById(R.id.tvUserScreenName);

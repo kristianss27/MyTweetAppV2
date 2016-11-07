@@ -27,7 +27,7 @@ public class Util {
             e.printStackTrace();
         }
 
-        String date;
+        /*String date;
         if(relativeDate.contains("in")){
             String[] array = relativeDate.split(" ");
             date = array[1].toString();
@@ -39,6 +39,37 @@ public class Util {
             date = date + array[1].substring(0, 1);
         }
 
-        return date;
+        return date;*/
+        return relativeDate;
+    }
+
+    public String getRelativeTimeAgo2(String rawJsonDate) {
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+
+        String relativeDate = "";
+        try {
+            long dateMillis = sf.parse(rawJsonDate).getTime();
+            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
+                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        // Making the string look like "1h", "1m", etc.
+        String[] relativeDateSplitted = relativeDate.split(" ");
+        if (relativeDateSplitted[1].contains("second")) {
+            return (relativeDateSplitted[0] + "s");
+        } else if (relativeDateSplitted[1].contains("minute")) {
+            return relativeDateSplitted[0] + "m";
+        } else if (relativeDateSplitted[1].contains("hour")) {
+            return relativeDateSplitted[0] + "h";
+        } else if (relativeDateSplitted[1].contains("day")) {
+            return relativeDateSplitted[0] + "d";
+        } else if (relativeDateSplitted[1].contains("month")) {
+            return relativeDateSplitted[0] + "M";
+        } else {
+            return relativeDateSplitted[0] + "y";
+        }
     }
 }

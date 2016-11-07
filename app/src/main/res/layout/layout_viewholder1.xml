@@ -77,12 +77,22 @@
         android:textStyle="normal"
         />
 
+    <ImageView
+        android:id="@+id/ivEmbeddedImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:maxHeight="200dp"
+        android:src="@drawable/love"
+        android:layout_below="@+id/tvTweetText"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/tvTweetText"
-        android:layout_marginBottom="10dp">
+        android:layout_below="@+id/ivEmbeddedImage"
+        android:layout_marginBottom="15dp">
 
         <ImageView
             android:id="@+id/ivReply"
