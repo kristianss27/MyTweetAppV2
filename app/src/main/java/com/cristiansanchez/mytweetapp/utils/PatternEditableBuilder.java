@@ -132,7 +132,7 @@ public class PatternEditableBuilder {
     }
 
     public PatternEditableBuilder addPattern(Pattern pattern, int textColor, SpannableClickedListener listener) {
-        SpannableStyleListener styles = new SpannableStyleListener(textColor) {
+        SpannableStyleListener styles = new SpannableStyleListener(0xFF000000) {
             @Override
             public void onSpanStyled(TextPaint ds) {
                 ds.linkColor = this.spanTextColor;

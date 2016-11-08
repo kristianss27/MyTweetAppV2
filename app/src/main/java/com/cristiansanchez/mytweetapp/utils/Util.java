@@ -63,7 +63,7 @@ public class Util {
             relativeDateSplitted[0]=relativeDateSplitted[1];
             relativeDateSplitted[1]=relativeDateSplitted[2];
         }
-        Log.d("TIME","relative date: "+ relativeDate);
+
         if (relativeDateSplitted[1].contains("second")) {
             return (relativeDateSplitted[0] + "s");
         }

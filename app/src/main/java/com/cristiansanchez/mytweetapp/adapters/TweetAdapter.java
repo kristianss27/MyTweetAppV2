@@ -137,15 +137,6 @@ public class TweetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     .error(R.mipmap.ic_launcher)
                     .into(vh1.ivUserImg);
 
-            new PatternEditableBuilder().addPattern(Pattern.compile("\\@(\\w+)"), Color.GRAY,
-                    new PatternEditableBuilder.SpannableClickedListener() {
-                        @Override
-                        public void onSpanClicked(String text) {
-                            adapterListener.onUserInfo(text);
-                        }
-                    }).into(vh1.tvTweetText);
-
-
             vh1.ivReplyTweet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -229,6 +220,13 @@ public class TweetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
 
             vh1.tvTweetText.setText(tweetBody);
+            new PatternEditableBuilder().addPattern(Pattern.compile("\\@(\\w+)"), Color.BLUE,
+                    new PatternEditableBuilder.SpannableClickedListener() {
+                        @Override
+                        public void onSpanClicked(String text) {
+                            adapterListener.onUserInfo(text);
+                        }
+                    }).into(vh1.tvTweetText);
         }
     }
 
